@@ -9,19 +9,27 @@ if not KEY or not WEBHOOK:
 now = datetime.now(timezone.utc)
 today = now.strftime("%A %d %B %Y")
 
-PROMPT = f"""You help Hands of Love Foundation, a children's charity in Uganda, with TikTok content.
-Today is {today}. Write fresh content for an international audience
-(USA, UK, Canada, Europe, Australia) who might become genuine donors.
+PROMPT = f"""You help Hands of Love Foundation, a children's charity, grow on TikTok.
+Today is {today}. The goal is to reach NEW supporters and genuine donors in the USA, UK,
+Canada, Germany, France, Netherlands, Switzerland, Sweden, Norway, Denmark, Ireland,
+Belgium and Australia. Write in English for that audience.
 
 Give exactly this, in plain text, short and clear:
-1. THREE caption ideas (each under 150 characters, warm, honest, no pressure, no guilt-tripping).
-2. TEN hashtags mixing charity, Uganda and general reach.
-3. TWO video ideas that can be filmed on a phone in under 30 seconds.
-4. ONE donor-trust tip (for example transparency about where money goes).
+1. THREE caption ideas (each under 150 characters). Focus on universal feelings: kindness,
+   hope, childhood, education, meals, giving back. Do not lead with the country name. Mention
+   Africa or Uganda at most once across all captions, only where it feels natural.
+2. TEN hashtags for broad GLOBAL reach on TikTok. Use general ones such as charity, giving,
+   kindness, donate, nonprofit, makeadifference, wholesome, hope. Do NOT use Uganda-specific
+   hashtags. Use at most one Africa hashtag.
+3. TWO video ideas that can be filmed on a phone in under 30 seconds and would suit viewers in
+   those countries (wholesome, uplifting, easy to share).
+4. ONE donor-trust tip (for example showing where donations go).
+5. ONE timing idea if a major giving season is near (such as GivingTuesday or Christmas).
 
-Rules: never invent statistics, trends or numbers. Never mention a specific child's name or
-identifying details. Remind to only film children with guardian consent and to avoid pity-based imagery.
-Do not claim anything is trending."""
+Rules: never invent statistics, trends or numbers. Never claim a hashtag is trending today.
+Never mention a specific child's name or identifying details. Only film children with
+guardian consent. Avoid pity-based imagery and avoid language that makes supporters feel like
+saviours; show children with dignity."""
 
 def send(text):
     data = json.dumps({"content": text[:1990]}).encode()
@@ -78,7 +86,8 @@ if not text:
     raise SystemExit("All models failed")
 
 send(f"✍️ **AI Caption Ideas for Hands of Love**\n"
-     f"Written by AI ({used}) on {today}. These are suggestions, not TikTok trend data.")
+     f"Written by AI ({used}) on {today}. These are suggestions, not live TikTok trend data. "
+     f"For real trending hashtags and sounds, use today's TikTok Creative Center links.")
 
 chunk = ""
 for para in text.split("\n"):
