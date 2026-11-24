@@ -1,6 +1,8 @@
 name: YouTube Trends
 on:
   workflow_dispatch:
+  schedule:
+    - cron: "0 7 * * *"
 jobs:
   run:
     runs-on: ubuntu-latest
